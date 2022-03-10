@@ -1,10 +1,16 @@
 //! from [here](https://github.com/Pragmatic-Elixir-Meetup/rpi-video-rs/blob/master/examples/simple.rs)
 use rpi_video_rs::recorder::Recorder;
+use rpi_video_rs::video_param::VideoParam;
 
 fn main() {
     println!("\nStart to record a new H264 video\n");
 
-    let mut recorder = Recorder::new(None);
+    let config = VideoParam {
+        output_file_path: "video.h264",
+        ..VideoParam::default()
+    };
+
+    let mut recorder = Recorder::new(config);
 
     match recorder.run() {
         Ok(res) => println!(
